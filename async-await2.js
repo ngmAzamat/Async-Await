@@ -33,3 +33,54 @@ console.log(3);
 - fullfilled - выполнено успешно, получен результат
 - rejected - выполненно с ошибкой
 */
+
+// но можно создать promise самим
+
+const promise = promise((fulfill, reject)) => {
+  console.log('начало, состояние pending');
+  setTimeout(() => {
+    if(Math.random() > 0.5) {
+      fulfill('ура, состояние fulfilled!');
+    } else {
+      reject('увы, состояние rejected!');
+    }
+  }, 3000)
+}
+
+promise
+
+.then(
+(succecssData) => {
+  console.log("Успех! полученные данные:", succecssData);
+},
+(errorData) => {
+  console.log("ошибка. полученные данные:", errorData);
+
+});
+.finally(() => {
+  console.log("код, выполняющийся в конце, вне зависимотсти от результата");
+});
+
+// acynk function a() - функция в ручную станет Ассинхронной и будет возвращять promise
+
+async function getSometing() {
+  return 'привет!'
+}
+
+getSometing()
+  .then((someting) => {
+    console.log(someting);
+  })
+async function getSometings() {
+  return new Promise((fulfill) => {
+    setTimeout(() => {
+      fulfill('Привет!');
+    },3000)
+  })
+}
+
+console.log('начало');
+const Sometings = await getSometings();
+console.log(Sometings);
+console.log('Конец');
+
