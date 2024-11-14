@@ -1,5 +1,7 @@
 import * as fs from "fs/promises";
-
+const red = Bun.color("red", "ansi");
+const green = Bun.color("green", "ansi");
+const white = Bun.color("white", "ansi");
 let counter = 0; // Инициализация счетчика правильных ответов
 
 function askQuestion(quest: string, answers: string[], answer: number) {
@@ -13,10 +15,10 @@ function askQuestion(quest: string, answers: string[], answer: number) {
   const HumanAnswer: number = parseInt(prompt("Ваш ответ:") || "0"); // parseInt() - делает number
 
   if (HumanAnswer == answer) {
-    console.log("вы правы");
+    console.log(green, "вы правы", white);
     return true;
   } else {
-    console.log("вы не правы");
+    console.log(red, "вы не правы", white);
     return false;
   }
 }
